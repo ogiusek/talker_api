@@ -1,12 +1,14 @@
 const http = require('http');
 const io = require('socket.io');
 
+const db = require('./db/db');
+
 const server = http.createServer();
 const socketServer = io(server);
 
 let clients = {};
 
-socketServer.on('connection', function (socket) {
+socketServer.on('connection', socket => {
     const clientAddress = socket.handshake.address;
     clients[clientAddress] = socket;
 
