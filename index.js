@@ -8,7 +8,7 @@ const socketServer = io(server);
 
 let clients = {};
 
-socketServer.on('connection', socket => {
+socketServer.on('connection', (socket) => {
     const clientAddress = socket.handshake.address;
     clients[clientAddress] = socket;
 
