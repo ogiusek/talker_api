@@ -1,15 +1,12 @@
 const sqlite3 = require('sqlite3').verbose();
+const removeUnregisteredAccounts = require('./func/remove/removeUnregistered');
 const db = new sqlite3.Database('./db/db.db');
+const initDb = require('./func/init/init.db.js');
 
-db.run(`CREATE TABLE IF NOT EXISTS test(
-    fVal VARCHAR(50),
-    sVal VARCHAR(50));`);
+initDb(db);
 
-// get
-// db.all('SELECT * FROM test;', [], (err, rows) => {
-//     console.log(rows);
-// });
+setInterval(() => {
+    removeUnregisteredAccounts();
+}, 1000 * 60 * 60);
 
-module.exports = {
-    db: db
-};
+module.exports = db;
