@@ -1,5 +1,6 @@
 const auth = require('./auth');
 const block_users = require('./block_user');
+const { dbCommands } = require('../db');
 
 let clients = {};
 
@@ -23,4 +24,4 @@ function defineSocket(socket) {
   });
 }
 
-module.exports = defineSocket;
+module.exports = { defineSocket: defineSocket, clients: clients };

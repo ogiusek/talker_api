@@ -27,8 +27,9 @@ const init = (db) => {
     clientAddress VARCHAR(255) UNIQUE NOT NULL,
         
     FOREIGN KEY(user_id) REFERENCES users(id)
-  );`);
-  db.run(`DELETE FROM users_addresses;`);
+  );`, () => {
+    db.run(`DELETE FROM users_addresses;`);
+  });
   db.run(`CREATE TABLE IF NOT EXISTS blocked_users(
     by_user INTEGER NOT NULL,
     blocked_user INTEGER NOT NULL,
