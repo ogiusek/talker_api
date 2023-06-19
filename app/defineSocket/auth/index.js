@@ -3,6 +3,12 @@ const logout = require('./logout');
 const register = require('./register');
 const confirm_register = require('./confirm.register');
 
+const removeUnregisteredAccounts = require('../../db/func/remove/removeUnregistered');
+
+setInterval(() => {
+    removeUnregisteredAccounts();
+}, 1000 * 60 * 60);
+
 function auth(socket) {
     login(socket);
     logout(socket);
