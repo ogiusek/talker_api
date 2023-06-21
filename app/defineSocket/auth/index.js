@@ -6,14 +6,14 @@ const confirm_register = require('./confirm.register');
 const removeUnregisteredAccounts = require('../../db/func/remove/removeUnregistered');
 
 setInterval(() => {
-    removeUnregisteredAccounts();
-}, 1000 * 60 * 60);
+  removeUnregisteredAccounts();
+}, 1000 * 60 * 60 * 24);
 
 function auth(socket) {
-    login(socket);
-    logout(socket);
-    register(socket);
-    confirm_register(socket);
+  login(socket);
+  logout(socket);
+  register(socket);
+  confirm_register(socket);
 }
 
 module.exports = auth;

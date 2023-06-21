@@ -2,7 +2,7 @@ const dbCommands = require('../../db/db.commands');
 const db = require('../../db/db');
 
 function login(socket) {
-  const clientAddress = socket.handshake.address;
+  const clientAddress = socket.handshake.url;
 
   socket.on('login', data => {
     if (typeof data !== 'object' || !('login' in data) || !('hash' in data))

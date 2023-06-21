@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const { emailTransporter, emailPass, frontend_link, email } = require('../../utils');
 const dbCommands = require('../../db/db.commands.js');
-const db = require('../../db/db.js');
+const db = require('../../db/db');
 const GetRegisterMail = require('./registerMail');
 
 function register(socket) {

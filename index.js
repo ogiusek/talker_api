@@ -11,7 +11,7 @@ const socketServer = io(server);
 
 setInterval(() => {
   db.all(`SELECT * FROM users_addresses;`, (err, rows) => console.log('Clients: ' + rows.length));
-}, 5000);
+}, 3000);
 
 defineApp(app);
 socketServer.on('connection', defineSocket);
