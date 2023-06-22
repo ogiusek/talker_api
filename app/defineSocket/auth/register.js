@@ -18,7 +18,7 @@ function register(socket) {
 
   socket.on('register', data => {
     if (typeof data !== 'object' || !('hash' in data) || !('email' in data) || !('username' in data))
-      return socket.emit('register', 'wrong data');
+      return socket.emit('error', 400);
 
     db.all(`SELECT username, email FROM users WHERE username = ? OR email = ?;`,
       [data['username'], data['email']], (errUsers, rowsUsers) => {

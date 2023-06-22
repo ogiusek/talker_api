@@ -6,7 +6,7 @@ function login(socket) {
 
   socket.on('login', data => {
     if (typeof data !== 'object' || !('login' in data) || !('hash' in data))
-      return socket.emit('login', 'Wrong data');
+      return socket.emit('error', 400);
 
     db.all(`SELECT email, id FROM users 
             WHERE (username = ? OR email = ?) AND hash = ?;`,

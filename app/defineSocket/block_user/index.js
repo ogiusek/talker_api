@@ -19,7 +19,7 @@ function block_user(socket) {
 
   socket.on('unlock_user', data => {
     if (typeof data !== 'object' || !('user_id' in data) || !('blocked_id' in data))
-      return socket.emit('unblock_user', 'wrong data');
+      return socket.emit('error', 400);
 
     auth_user(socket, data, () => {
       db.run(`DELETE FROM blocked_users WHERE 

@@ -9,7 +9,7 @@ const { auth_user } = require('../../../utils');
 function type(socket) {
   socket.on('type', data => {
     if (typeof data !== 'object' || !('user_id' in data) || !('to_id' in data))
-      return socket.emit('type', 'wrong data');
+      return socket.emit('error', 400);
 
     auth_user(socket, data, () => {
       const identyfier = data['user_id'] + '-' + data['to_id'];
