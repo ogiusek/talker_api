@@ -1,12 +1,19 @@
-const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const io = require('socket.io');
 const express = require('express');
 
-const { db, defineSocket } = require('./app');
 const defineApp = require('./app/defineApp');
+const { db, defineSocket } = require('./app');
+
+const options = {
+  // openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+  key: fs.readFileSync('./key.pem'),
+  cert: fs.readFileSync('./cert.pem')
+};
 
 const app = express();
-const server = http.createServer(app);
+const server = https.createServer(options, app);
 const socketServer = io(server);
 
 setInterval(() => {

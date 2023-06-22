@@ -7,7 +7,6 @@ function notify(user, to) {
     if (waitingRows.length === 0)
       return;
 
-    // console.log(waitingRows.length);
     waitingRows.map(e => {
       const clientAddress = e.user_address;
       if (!clients[clientAddress])

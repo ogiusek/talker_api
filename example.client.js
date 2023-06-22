@@ -1,4 +1,4 @@
-const socket = require('socket.io-client')('http://localhost:8080');
+const socket = require('socket.io-client')('http://localhost:8080', { secure: true, rejectUnauthorized: false });
 
 socket.on('connect', () => {
   socket.on('messeage', data => {
