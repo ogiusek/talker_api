@@ -2,12 +2,17 @@ const { db } = require('../../db');
 const { auth_user } = require('../../utils');
 
 const notify = require('./notify');
+const markAsReaden = require('./read');
 
 function messeage(socket) {
+  markAsReaden(socket);
+
+
   socket.on('messeage', data => {
     if (typeof data !== 'object' || !('user_id' in data) || !('to_id' in data) ||
       !('content' in data) || !('content_type' in data))
       return socket.emit('error', 400);
+
     auth_user(socket, data, () => {
       db.run(`INSERT INTO messeages(content, content_type, from_user, to_user) VALUES(?, ?, ?, ?);`,
         [data['content'], data['content_type'], data['user_id'], data['to_id']], (err, _) => {
