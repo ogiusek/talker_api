@@ -50,20 +50,21 @@ const init = (db) => {
     to_user INTEGER NOT NULL,
     FOREIGN KEY(user) REFERENCES users(id),
     FOREIGN KEY(to_user) REFERENCES users(id)
-    );`, [], () => db.run(`DELETE FROM typing_wait;`));
+  );`, [], () => db.run(`DELETE FROM typing_wait;`));
 
 
   db.run(`CREATE TABLE IF NOT EXISTS messeages(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-    messeage VARCHAR(8191) NOT NULL,
-    type VARCHAR(1) DEFAULT 'm',
+    content VARCHAR(2047) NOT NULL,
+    content_type VARCHAR(7) CHECK(content_type IN ('text', 'video', 'photo', 'audio', 'file')) DEFAULT 'text' NOT NULL,
+
     from_user INTEGER NOT NULL,
     to_user INTEGER NOT NULL,
-    readen BOOLEAN DEFAULT 0,
-    when_readen DATE,
-    notified BOOLEAN DEFAULT 0,
-        
+
+    readen DATE DEFAULT NULL,
+    notified BOOLEAN DEFAULT 0 NOT NULL,
+
     init_date DATE DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(from_user) REFERENCES users(id),
     FOREIGN KEY(to_user) REFERENCES users(id)
@@ -73,8 +74,9 @@ const init = (db) => {
     db.all(`SELECT id FROM users;`, (err, rows) => {
       if (rows.length !== 0)
         return;
-      db.run(`INSERT INTO users(email, username, hash) VALUES("kowalewski.olgierd@gmail.com", "user", "x")`);
-      db.run(`INSERT INTO users(email, username, hash) VALUES("ogius06@wp.pl", "talker", "x")`);
+      db.run(`INSERT INTO users(email, username, hash) VALUES("kowalewski.olgierd@gmail.com", "user", "x");`);
+      db.run(`INSERT INTO users(email, username, hash) VALUES("ogius06@wp.pl", "talker", "x");`);
+      console.log('Created users');
     });
   }, 1000);
 }

@@ -12,7 +12,6 @@ function defineSocketMethods(socket) {
   block_users(socket);
   messeage(socket);
   type(socket);
-  // type messeage
 }
 
 function defineSocket(socket) {
@@ -26,7 +25,7 @@ function defineSocket(socket) {
   socket.on('disconnect', () => {
     dbCommands.removeTemporaryData(clientAddress);
     dbCommands.resetClientAddress(clientAddress);
-    clients[clientAddress] = undefined;
+    delete clients[clientAddress];
   });
 }
 
