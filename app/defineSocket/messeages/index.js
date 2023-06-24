@@ -18,8 +18,8 @@ function messeage(socket) {
         [data['content'], data['content_type'], data['user_id'], data['to_id']], (err, _) => {
           if (err) return socket.emit('error', 'Wrong content type or to long messeage');
 
-          db.run(`UPDATE messeages set readen = CURRENT_TIMESTAMP 
-          WHERE readen = NULL AND to_user = ? AND from_user = ?;`, [data['user_id'], data['to_id']]);
+          db.run(`UPDATE messeages set readen = CURRENT_TIMESTAMP
+            WHERE readen = NULL AND to_user = ? AND from_user = ?;`, [data['user_id'], data['to_id']]);
 
           notify(data['to_id']);
         });

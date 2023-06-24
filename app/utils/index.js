@@ -5,9 +5,11 @@ const default_avatar = require('./utilsData/defaultAvatar');
 const emailTransporter = require('./utilsData/email.transporter');
 
 const auth_user = require('./utilsCodes/auth_user');
+const for_address = require('./utilsCodes/for_address');
 
 module.exports = {
   auth_user: auth_user,
+  for_address: for_address,
 
   emailTransporter: emailTransporter,
   default_avatar: default_avatar,

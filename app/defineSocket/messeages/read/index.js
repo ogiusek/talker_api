@@ -1,5 +1,6 @@
 const { db } = require('../../../db');
 const { auth_user } = require("../../../utils");
+const notify = require('./notify');
 
 function markAsReaden(socket) {
   socket.on('read', (data) => {
@@ -8,7 +9,9 @@ function markAsReaden(socket) {
 
     auth_user(socket, data, () => {
       db.run(`UPDATE messeages SET readen = CURRENT_TIMESTAMP WHERE readen = NULL AND id <= ?  AND from_user = ?;`,
-        [data['messeage_id'], data['user_id']]);
+        [data['messeage_id'], data['user_id']], () => {
+          notify(data);
+        });
     });
 
   });
