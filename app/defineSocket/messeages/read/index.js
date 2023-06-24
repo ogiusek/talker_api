@@ -1,3 +1,4 @@
+const { db } = require('../../../db');
 const { auth_user } = require("../../../utils");
 
 function markAsReaden(socket) {
