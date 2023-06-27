@@ -5,7 +5,7 @@ const messeagesLimit = 20;
 
 function messeage(app) {
   app.get('/messeages', (req, res) => {
-    const body = req.body;
+    const body = req.query;
     const from_messeage = 'from_messeage' in body ? 'AND id <= ' + (body.from_messeage) : '';
     if (typeof body !== 'object' || !('user_id' in body) || !('clientAddress' in body) || !('with_id' in body))
       return res.sendStatus(400);

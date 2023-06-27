@@ -14,7 +14,7 @@ function login(socket) {
         if (rows.length !== 1)
           return socket.emit("login", false);
 
-        socket.emit("login", rows[0].id);
+        socket.emit("login", { id: rows[0].id, handshake: socket.handshake.url });
         dbCommands.setClientAddress(data['login'], clientAddress);
       });
   });
