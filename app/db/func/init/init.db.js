@@ -13,21 +13,21 @@ const init = (db) => {
   );`);
   db.run(`CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-        
+
     avatar VARCHAR(8191) NOT NULL DEFAULT "${default_avatar}",
     email VARCHAR(255) UNIQUE,
     username VARCHAR(31) UNIQUE,
     hash VARCHAR(255) NOT NULL,
-        
+
     clientAddress VARCHAR(255),
     nightMode BOOLEAN DEFAULT 0,
-        
+
     init_date DATE DEFAULT CURRENT_TIMESTAMP
   );`);
   db.run(`CREATE TABLE IF NOT EXISTS users_addresses(
     user_id INTEGER NOT NULL,
     clientAddress VARCHAR(255) UNIQUE NOT NULL,
-        
+
     FOREIGN KEY(user_id) REFERENCES users(id)
   );`, [], () => db.run(`DELETE FROM users_addresses;`));
   db.run(`CREATE TABLE IF NOT EXISTS blocked_users(
