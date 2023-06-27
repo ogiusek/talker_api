@@ -20,9 +20,12 @@ function contacts(app) {
 
           if (err) return console.log(err) || res.sendStatus(400);
           const dRows = Object.values(rows.reduce((acc, obj) => {
-            acc[obj.bab] = obj;
+            if (!acc[obj.bab]) {
+              acc[obj.bab] = { ...obj };
+              delete acc[obj.bab].bab;
+            }
             return acc;
-          }, {})).map(e => { delete e.bab; return e; });
+          }, {}));
 
           res.json(dRows);
           res.end();
