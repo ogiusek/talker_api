@@ -2,7 +2,7 @@ const { db } = require('../../db');
 
 function blocked_user(app) {
   app.get('/blocked/users', (req, res) => {
-    const body = req.body;
+    const body = req.query;
     if (typeof body !== 'object' || !('user_id' in body) || !('clientAddress' in body))
       return res.sendStatus(400);
 

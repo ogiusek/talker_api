@@ -9,7 +9,7 @@ const { db, defineSocket } = require('./app');
 const options = {
   // openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
   key: fs.readFileSync('./key.pem'),
-  cert: fs.readFileSync('./cert.pem')
+  cert: fs.readFileSync('./cert.pem'),
 };
 
 const app = express();
