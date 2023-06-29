@@ -2,11 +2,11 @@ const db = require("../../db/db");
 
 function confirm_register(app) {
   app.get('/register/confirm', (req, res) => {
-    const body = req.query;
-    if (typeof body !== 'object' || !('id' in body) || !('uuid' in body))
+    const query = req.query;
+    if (typeof query !== 'object' || !('id' in query) || !('uuid' in query))
       return res.sendStatus(400);
 
-    db.all(`SELECT email, username, hash FROM unconfirmed_users WHERE id = ? AND uuid = ?;`, [body['id'], body['uuid']], (err, rows) => {
+    db.all(`SELECT email, username, hash FROM unconfirmed_users WHERE id = ? AND uuid = ?;`, [query['id'], query['uuid']], (err, rows) => {
       if (err) return res.sendStatus('error', 422);
       if (rows.length !== 1) return res.json({ res: 'Wrong or out dated link' });
       const user = rows[0];

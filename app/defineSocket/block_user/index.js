@@ -11,7 +11,7 @@ function block_user(socket) {
       db.run(`INSERT INTO blocked_users(by_user, blocked_user) 
       VALUES((SELECT user_id FROM users_addresses WHERE clientAddress = ? AND user_id = ? LIMIT 1), ?);`,
         [socket.handshake.url, data['user_id'], data['blocked_id']], (err, _) => {
-          if (err) socket.emit('block_user', !err);
+          if (err) socket.emit('error', 422);
         });
     });
   });
@@ -23,7 +23,7 @@ function block_user(socket) {
     auth_user(socket, data, () => {
       db.run(`DELETE FROM blocked_users WHERE by_user = ? AND blocked_user = ?;`,
         [data['user_id'], data['blocked_id']], (err, _) => {
-          if (err) return socket.emit('unblock_user', !err);
+          if (err) return socket.emit('error', 422);
         });
     });
   });
