@@ -1,4 +1,4 @@
-const auth = require('../defineSocket/auth');
+const auth = require('./auth');
 const blocked_user = require('./block_user');
 const contacts = require('./contacts');
 const messeage = require('./messeages');
