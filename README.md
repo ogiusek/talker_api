@@ -4,6 +4,8 @@
 talker is made to communicate\
 here is description how to use this socket api
 
+#### Made with:
+[![GitHub stars](https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_f0b606abb6d19089febc9faeeba5bc05/nodejs-development-services.png)](https://github.com/username/repo/stargazers)
 
 ## Run Locally
 
@@ -23,6 +25,7 @@ Go to the project directory
 ```bash
   openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
 ```
+
 
 Install dependencies
 ```bash
@@ -113,7 +116,15 @@ Resends your id of your account and your address
 | ***`login`*** | `string` | Username or email  |
 | ***`hash`*** | `string` | Hashed password to account |
 
-
+You can also connect on init with auth 
+```js
+const socket = io('https://127.0.0.1:8080', 
+  { 
+    rejectUnauthorized: false, 
+    auth:{login: '?', hash: '?'} 
+  });
+```
+‎\
 `logout`\
 logs out users\
 takes no parameters
@@ -206,7 +217,7 @@ Sends you info when caller typing
 [@ogiusek](https://github.com/ogiusek?tab=repositories)
 
 
+
 ## License
 
 [ISC](https://choosealicense.com/licenses/isc/)
-
