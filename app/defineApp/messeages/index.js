@@ -13,8 +13,7 @@ function messeage(app) {
     auth_user(query.clientAddress, query, () => {
       db.all(`SELECT id, (SELECT value FROM FILES WHERE id = messeages.content_id) AS content, content_type, 
             from_user, to_user, 
-            readen, notified, init_date, 
-              CASE WHEN EXISTS (SELECT 1 FROM sqlite_master WHERE type='table' AND name='sqlite_sequence') THEN 1 ELSE 0 END AS usedLimit
+            readen, notified, init_date
           FROM messeages 
           WHERE ((from_user = ? AND to_user = ?) OR (to_user = ? AND from_user = ?)) ${from_messeage}
           ORDER BY init_date DESC, id DESC LIMIT ${messeagesLimit + 1};`,
