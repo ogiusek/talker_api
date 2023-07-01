@@ -1,9 +1,14 @@
 const default_avatar = require("../../../utils/utilsData/defaultAvatar");
 
 const init = (db) => {
+  db.run(`CREATE TABLE IF NOT EXISTS files(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    value BLOB UNIQUE NOT NULL
+  );`, () => db.run(`INSERT INTO files(id, value) VALUES(0, ?);`, [default_avatar], (err) => 0));
+
   db.run(`CREATE TABLE IF NOT EXISTS unconfirmed_users(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    uuid VARCHAR(31) NOT NULL,
+    uuid TEXT NOT NULL,
 
     email VARCHAR(255) UNIQUE,
     username VARCHAR(31) UNIQUE,
@@ -14,19 +19,22 @@ const init = (db) => {
   db.run(`CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-    avatar VARCHAR(8191) NOT NULL DEFAULT "${default_avatar}",
+    avatar_id INTEGER NOT NULL DEFAULT 0,
     email VARCHAR(255) UNIQUE,
     username VARCHAR(31) UNIQUE,
     hash VARCHAR(255) NOT NULL,
 
-    clientAddress VARCHAR(255),
     nightMode BOOLEAN DEFAULT 0,
 
-    init_date DATE DEFAULT CURRENT_TIMESTAMP
-  );`);
+    init_date DATE DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(avatar_id) REFERENCES files(id)
+  );`, () => {
+    db.run(`INSERT INTO users(email, username, hash) VALUES("kowalewski.olgierd@gmail.com", "user", "x");`, () => 0);
+    db.run(`INSERT INTO users(email, username, hash) VALUES("ogius06@wp.pl", "talker", "x");`, () => 0);
+  });
   db.run(`CREATE TABLE IF NOT EXISTS users_addresses(
     user_id INTEGER NOT NULL,
-    clientAddress VARCHAR(255) UNIQUE NOT NULL,
+    clientAddress TEXT UNIQUE NOT NULL,
 
     FOREIGN KEY(user_id) REFERENCES users(id)
   );`, [], () => db.run(`DELETE FROM users_addresses;`));
@@ -46,7 +54,7 @@ const init = (db) => {
   );`, [], () => db.run(`DELETE FROM typing;`));
   db.run(`CREATE TABLE IF NOT EXISTS typing_wait(
     user INTEGER NOT NULL,
-    user_address VARCHAR(255) UNIQUE NOT NULL,
+    user_address TEXT UNIQUE NOT NULL,
     to_user INTEGER NOT NULL,
     FOREIGN KEY(user) REFERENCES users(id),
     FOREIGN KEY(to_user) REFERENCES users(id)
@@ -56,7 +64,7 @@ const init = (db) => {
   db.run(`CREATE TABLE IF NOT EXISTS messeages(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-    content VARCHAR(2047) NOT NULL,
+    content_id INTEGER NOT NULL,
     content_type VARCHAR(7) CHECK(content_type IN ('text', 'video', 'photo', 'audio', 'file')) DEFAULT 'text' NOT NULL,
 
     from_user INTEGER NOT NULL,
@@ -66,19 +74,10 @@ const init = (db) => {
     notified BOOLEAN DEFAULT 0 NOT NULL,
 
     init_date DATE DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(content_id) REFERENCES files(id),
     FOREIGN KEY(from_user) REFERENCES users(id),
     FOREIGN KEY(to_user) REFERENCES users(id)
   );`);
-
-  setTimeout(() => {
-    db.all(`SELECT id FROM users;`, (err, rows) => {
-      if (rows.length !== 0)
-        return;
-      db.run(`INSERT INTO users(email, username, hash) VALUES("kowalewski.olgierd@gmail.com", "user", "x");`);
-      db.run(`INSERT INTO users(email, username, hash) VALUES("ogius06@wp.pl", "talker", "x");`);
-      console.log('Created users');
-    });
-  }, 1000);
 }
 
 module.exports = init;

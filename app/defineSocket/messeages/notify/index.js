@@ -5,7 +5,7 @@ const clients = require('../../clients');
 const notify_notified = require('./notify.notified');
 
 function notify(user) {
-  db.all(`SELECT DISTINCT from_user, to_user, id, content, content_type, readen, notified, init_date FROM messeages
+  db.all(`SELECT DISTINCT from_user, to_user, id, (SELECT value FROM files WHERE files.id = content_id) AS content, content_type, readen, notified, init_date FROM messeages
   WHERE to_user = ? AND notified = 0;`, [user], (err, rows) => {
     if (err) return;
 
