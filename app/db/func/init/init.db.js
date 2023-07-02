@@ -6,6 +6,7 @@ const init = (db) => {
     value BLOB UNIQUE NOT NULL
   );`, () => db.run(`INSERT INTO files(id, value) VALUES(0, ?);`, [default_avatar], (err) => 0));
 
+
   db.run(`CREATE TABLE IF NOT EXISTS unconfirmed_users(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     uuid TEXT NOT NULL,

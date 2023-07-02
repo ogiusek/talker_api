@@ -16,7 +16,7 @@ const app = express();
 const server = https.createServer(options, app);
 const socketServer = io(server);
 
-setInterval(() => db.all(`SELECT * FROM users_addresses;`, (err, rows) => console.log('Clients: ' + rows.length)), 3000);
+// setInterval(() => db.all(`SELECT * FROM users_addresses;`, (err, rows) => console.log('Clients: ' + rows.length)), 3000);
 
 defineApp(app);
 socketServer.on('connection', defineSocket);

@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const { emailTransporter, frontend_link, email } = require('../../utils');
 const db = require('../../db/db');
-const GetRegisterMail = require('./registerMail');
+const GetRegisterMail = require('./utils/registerMail');
 
 function register(app) {
   app.get('/register', (req, res) => {
