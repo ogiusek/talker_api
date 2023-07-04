@@ -63,6 +63,19 @@ socket.onAny((eventName, data)=>{
 ## Rest Api
 
 ### Auth
+
+`/isUsed/email`
+Returns is email used
+| Parameter | Type | Description | Required |
+| :- | :- | :- | :- |
+| ***`email`*** | `string` | check's if email is used | yes |
+
+`/isUsed/username`
+Returns is username used
+| Parameter | Type | Description | Required |
+| :- | :- | :- | :- |
+| ***`username`*** | `string` | Unique not used email | yes |
+
 `/register`
 Used to create account
 | Parameter | Type | Description | Required |
