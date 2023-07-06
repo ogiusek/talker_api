@@ -22,6 +22,7 @@ Go to the project directory
 ```
 
 [How create certificate](https://www.howtogeek.com/devops/what-is-a-pem-file-and-how-do-you-use-it/)
+Generate cert and sign with csr or buy one
 ```bash
   openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
 ```
@@ -44,7 +45,8 @@ How to connect to socket api
 ```js
 import { io } from 'socket.io-client';
 
-const socket = io('https://127.0.0.1:8080', { rejectUnauthorized: false });
+const socket = io('https://127.0.0.1:8080');
+const socket = io('https://127.0.0.1:8080', { rejectUnauthorized: false }); // If cert is not signed
 ```
 
 Simple commands
