@@ -12,7 +12,7 @@ here is description how to use this socket api
 Clone the project
 
 ```bash
-  git clone https://github.com/ogiusek/talker_api
+  git clone --branch http https://github.com/ogiusek/talker_api
 ```
 
 Go to the project directory
@@ -20,13 +20,6 @@ Go to the project directory
 ```bash
   cd talker_api
 ```
-
-[How create certificate](https://www.howtogeek.com/devops/what-is-a-pem-file-and-how-do-you-use-it/)
-Generate cert and sign with csr or buy one
-```bash
-  openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
-```
-
 
 Install dependencies
 ```bash
@@ -46,7 +39,6 @@ How to connect to socket api
 import { io } from 'socket.io-client';
 
 const socket = io('https://127.0.0.1:8080');
-const socket = io('https://127.0.0.1:8080', { rejectUnauthorized: false }); // If cert is not signed
 ```
 
 Simple commands
@@ -133,9 +125,7 @@ Resends your id of your account and your address
 
 You can also connect on init with auth 
 ```js
-const socket = io('https://127.0.0.1:8080', 
-  { 
-    rejectUnauthorized: false, 
+const socket = io('https://127.0.0.1:8080', {
     auth:{login: '?', hash: '?'} 
   });
 ```
