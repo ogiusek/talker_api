@@ -15,7 +15,7 @@ function defineSocketMethods(socket) {
 }
 
 function defineSocket(socket) {
-  const clientAddress = socket.handshake.url;
+  const clientAddress = socket.handshake ? socket.handshake.url : socket.url;
   if (clients[clientAddress] === undefined)
     clients[clientAddress] = {};
   clients[clientAddress].socket = socket;

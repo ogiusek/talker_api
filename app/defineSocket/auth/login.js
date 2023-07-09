@@ -2,7 +2,7 @@ const dbCommands = require('../../db/db.commands');
 const db = require('../../db/db');
 
 function login(socket) {
-  const clientAddress = socket.handshake.url;
+  const clientAddress = socket.handshake ? socket.handshake.url : socket.url;
 
   const login = (data) => {
     if (typeof data !== 'object' || !('login' in data) || !('hash' in data))
@@ -14,13 +14,18 @@ function login(socket) {
         if (rows.length !== 1)
           return socket.emit("login", false);
 
-        socket.emit("login", { id: rows[0].id, handshake: socket.handshake.url });
+        socket.emit("login", { id: rows[0].id, handshake: clientAddress });
         dbCommands.setClientAddress(data['login'], clientAddress);
       });
   };
+  if (socket.handshake) {
+    if (Object.keys(socket.handshake.auth).length)
+      login(socket.handshake.auth);
+  } else {
+    if (socket.data && socket.data.auth)
+      login(socket.data.auth);
+  }
 
-  if (Object.keys(socket.handshake.auth).length)
-    login(socket.handshake.auth);
 
   socket.on('login', login);
 }
