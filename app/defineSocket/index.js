@@ -19,6 +19,7 @@ function defineSocket(socket) {
   if (clients[clientAddress] === undefined)
     clients[clientAddress] = {};
   clients[clientAddress].socket = socket;
+  socket.emit('address', { address: clientAddress });
 
   defineSocketMethods(socket);
 
