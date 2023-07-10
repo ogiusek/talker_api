@@ -1,6 +1,6 @@
 const { db } = require('../../../db');
 const { for_address } = require('../../../utils');
-const clients = require('../../clients');
+const { socketEmit, clients } = require('../../utils');
 
 const notify_notified = require('./notify.notified');
 
@@ -14,7 +14,8 @@ function notify(user) {
         db.all(`SELECT by_user FROM blocked_users WHERE by_user = ? AND blocked_user = ?;`, [user, messeage.from_user], (err, blockedRows) => {
           if (err || blockedRows.length !== 0) return;
           db.run(`UPDATE messeages SET notified = 1 WHERE id <= ? AND from_user = ?;`, [messeage.id, messeage.from_user]);
-          clients[address].socket.emit('messeage', messeage);
+
+          socketEmit(clients[address].socket, "messeage", messeage);
           notify_notified(messeage.id);
         });
       });

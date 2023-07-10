@@ -5,27 +5,26 @@ const on_stop_typing = require('./on_stop_typing');
 const notify = require('../notify');
 
 const { auth_user } = require('../../../utils');
+const { setEvent, socketEmit } = require('../../utils');
 
-function type(socket) {
-  socket.on('type', data => {
-    if (typeof data !== 'object' || !('user_id' in data) || !('to_id' in data))
-      return socket.emit('error', 400);
+const type = (socket, data) => {
+  if (typeof data !== 'object' || !('user_id' in data) || !('to_id' in data))
+    return socketEmit(socket, 'error', 400);
 
-    auth_user(socket, data, () => {
-      const identyfier = data['user_id'] + '-' + data['to_id'];
+  auth_user(socket, data, () => {
+    const identyfier = data['user_id'] + '-' + data['to_id'];
 
-      if (typing[identyfier] === undefined) {
-        typing[identyfier] = { 'func': on_stop_typing(data, identyfier) };
+    if (typing[identyfier] === undefined) {
+      typing[identyfier] = { 'func': on_stop_typing(data, identyfier) };
 
-        db.run(`INSERT INTO typing(user, to_user) VALUES(?, ?);`,
-          [data['user_id'], data['to_id']], () => {
-            notify(data['user_id'], data['to_id']);
-          });
-      }
+      db.run(`INSERT INTO typing(user, to_user) VALUES(?, ?);`,
+        [data['user_id'], data['to_id']], () => {
+          notify(data['user_id'], data['to_id']);
+        });
+    }
 
-      runTimer(identyfier);
-    });
+    runTimer(identyfier);
   });
 }
 
-module.exports = type;
+setEvent('type', type);

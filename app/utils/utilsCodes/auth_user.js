@@ -1,5 +1,6 @@
 const db = require('../../db/db');
-const clients = require('../../defineSocket/clients');
+const { socketEmit } = require('../../defineSocket/utils');
+const clients = require('../../defineSocket/utils/clients');
 
 function auth_user(socket, data, onLogin, onWrongData = () => { }) {
   const socketIsHandshake = typeof socket !== 'object';
@@ -12,7 +13,7 @@ function auth_user(socket, data, onLogin, onWrongData = () => { }) {
         const realSocket = socketIsHandshake ?
           clients[socket].socket :
           socket;
-        realSocket.emit('auth', false);
+        socketEmit(realSocket, 'auth', false);
         onWrongData();
       } catch (err) { }
     });
