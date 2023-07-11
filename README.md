@@ -198,20 +198,24 @@ Sends you info when caller typing
 - ***`error`***
   sends error code of last action
 
+- ***`address`***
+  sends `address` of your api on init
+
 - ***`login`***
   sends `id` and `clientAddress` on login
-
+  
 - ***`messeage`***
-  sends new messeage
+  sends new messeage (`from_user`, `to_user`, `id`,\
+   `init_date`, `content`, `content_type`, `readen`, `notified`)
 
 - ***`notified`***
-  sends id of messeage if somebody get's notified
+  sends `messeage_id` of messeage if somebody get's notified 
 
 - ***`read`***
-  sends id of messeage if somebody get's notified
+  sends `messeage_id` of messeage if somebody get's notified
 
 - ***`typing`***
-  sends id of user if he starts or stops typing
+  sends `typer` id of user if he starts or stops typing and `typing` if `typer` is typing
 
 - ***`auth`***
   sends false when you're using id of user on which you are not logged in
