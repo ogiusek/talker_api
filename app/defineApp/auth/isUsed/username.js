@@ -1,4 +1,4 @@
-const db = require("../../../db");
+import db from "../../../db/db.js";
 
 function username(app) {
   app.get('/isUsed/username', (req, res) => {
@@ -18,4 +18,4 @@ function username(app) {
   });
 }
 
-module.exports = username;
+export default username;

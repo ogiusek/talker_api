@@ -1,4 +1,4 @@
 let clients = {};
 // clients[address].socket
 
-module.exports = clients;
+export default clients;

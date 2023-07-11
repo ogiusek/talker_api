@@ -1,10 +1,10 @@
-const { db } = require('../../db');
-const { getFileId } = require('../../db/db.commands');
-const { auth_user } = require('../../utils');
-const notify = require('./notify');
-const { setEvent } = require('../utils');
+import db from '../../db/db.js';
+import { getFileId } from '../../db/db.commands.js';
+import auth_user from '../../utils/utilsCodes/auth_user.js';
+import notify from './notify/index.js';
+import { setEvent } from '../utils/index.js';
 
-require('./read');
+import * as _1 from "./read/index.js";
 
 const messeage = (socket, data) => {
   const content_type = !('content_type' in data) ? 'text' : data['content_type'];

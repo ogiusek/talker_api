@@ -29,4 +29,4 @@ function GetRegisterMail(link) {
 </div>`);
 };
 
-module.exports = GetRegisterMail;
+export default GetRegisterMail;

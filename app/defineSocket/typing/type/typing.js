@@ -1,11 +1,9 @@
-const db = require('../../../db/db');
-
-const { runTimer, typing } = require('../utils');
-const on_stop_typing = require('./on_stop_typing');
-const notify = require('../notify');
-
-const { auth_user } = require('../../../utils');
-const { setEvent, socketEmit } = require('../../utils');
+import db from '../../../db/db.js';
+import { runTimer, typing } from '../utils.js';
+import on_stop_typing from './on_stop_typing.js';
+import notify from '../notify/index.js';
+import { auth_user } from '../../../utils/index.js';
+import { setEvent, socketEmit } from '../../utils/index.js';
 
 const type = (socket, data) => {
   if (typeof data !== 'object' || !('user_id' in data) || !('to_id' in data))

@@ -1,6 +1,6 @@
-const confirm_register = require("./confirm.register");
-const isUsed = require("./isUsed");
-const register = require("./register");
+import confirm_register from "./confirm.register.js";
+import isUsed from "./isUsed/index.js";
+import register from "./register.js";
 
 function auth(app) {
   confirm_register(app);
@@ -8,4 +8,4 @@ function auth(app) {
   isUsed(app);
 }
 
-module.exports = auth;
+export default auth;

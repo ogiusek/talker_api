@@ -1,4 +1,4 @@
-const default_avatar = require("../../../utils/utilsData/defaultAvatar");
+import default_avatar from "../../../utils/utilsData/defaultAvatar.js";
 
 const init = (db) => {
   db.run(`CREATE TABLE IF NOT EXISTS files(
@@ -81,4 +81,4 @@ const init = (db) => {
   );`);
 }
 
-module.exports = init;
+export default init;

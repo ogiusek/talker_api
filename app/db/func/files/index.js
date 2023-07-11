@@ -1,7 +1,4 @@
-const getFile = require("./getFile");
-const getFileId = require("./getId");
+import getFile from "./getFile.js";
+import getFileId from "./getId.js";
 
-module.exports = {
-  getFile: getFile,
-  getFileId: getFileId
-};
+export { getFile, getFileId };

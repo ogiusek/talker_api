@@ -1,4 +1,4 @@
-const { db } = require('../../db');
+import db from '../../db/db.js';
 
 function blocked_user(app) {
   app.get('/blocked/users', (req, res) => {
@@ -13,4 +13,4 @@ function blocked_user(app) {
   });
 }
 
-module.exports = blocked_user;
+export default blocked_user;

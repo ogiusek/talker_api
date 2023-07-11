@@ -10,8 +10,4 @@ const getEvent = (eventname) => {
 
 const getEvents = () => events
 
-module.exports = {
-  setEvent: setEvent,
-  getEvent: getEvent,
-  getEvents: getEvents
-};
+export { setEvent, getEvent, getEvents };

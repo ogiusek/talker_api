@@ -1,5 +1,5 @@
-const { db } = require('../../db');
-const { auth_user } = require('../../utils');
+import { db } from '../../db/index.js';
+import auth_user from '../../utils/utilsCodes/auth_user.js';
 
 const messeagesLimit = 20;
 
@@ -31,4 +31,4 @@ function messeage(app) {
   });
 }
 
-module.exports = messeage;
+export default messeage;

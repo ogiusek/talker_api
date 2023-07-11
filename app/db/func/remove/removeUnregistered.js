@@ -1,8 +1,8 @@
-const db = require('../../db');
+import db from '../../db.js';
 
 function removeUnregisteredAccounts() {
   db.run(`DELETE FROM unconfirmed_users WHERE init_date < ?;`, [
     new Date(Date.now() - 24 * 60 * 60 * 1000)]);
 }
 
-module.exports = removeUnregisteredAccounts;
+export default removeUnregisteredAccounts;

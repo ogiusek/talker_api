@@ -1,7 +1,7 @@
-const db = require("../../db/db");
+import db from "../../db/db.js";
 
-const { auth_user } = require('../../utils');
-const { setEvent, socketEmit } = require("../utils");
+import auth_user from "../../utils/utilsCodes/auth_user.js";
+import { setEvent, socketEmit } from "../utils/index.js";
 
 const unlock = (socket, data) => {
   if (typeof data !== 'object' || !('user_id' in data) || !('blocked_id' in data))

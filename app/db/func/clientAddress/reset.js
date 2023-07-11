@@ -1,7 +1,7 @@
-const db = require('../../db');
+import db from '../../db.js';
 
 const resetClientAddress = (addr) => {
   db.run(`DELETE FROM users_addresses WHERE clientAddress = ?;`, [addr]);
 }
 
-module.exports = resetClientAddress;
+export default resetClientAddress

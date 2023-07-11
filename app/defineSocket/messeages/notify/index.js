@@ -1,8 +1,8 @@
-const { db } = require('../../../db');
-const { for_address } = require('../../../utils');
-const { socketEmit, clients } = require('../../utils');
+import db from '../../../db/db.js';
+import { for_address } from '../../../utils/index.js';
+import { socketEmit, clients } from '../../utils/index.js';
 
-const notify_notified = require('./notify.notified');
+import notify_notified from "./notify.notified.js";
 
 function notify(user) {
   db.all(`SELECT DISTINCT from_user, to_user, id, (SELECT value FROM files WHERE files.id = content_id) AS content, content_type, readen, notified, init_date FROM messeages
@@ -23,4 +23,4 @@ function notify(user) {
   });
 }
 
-module.exports = notify;
+export default notify

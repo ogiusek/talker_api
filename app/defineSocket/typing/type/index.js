@@ -1,1 +1,1 @@
-require('./typing');
+import * as _1 from "./typing.js";

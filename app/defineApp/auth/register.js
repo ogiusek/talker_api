@@ -1,7 +1,7 @@
-const { v4: uuidv4 } = require('uuid');
-const { emailTransporter, frontend_link, email } = require('../../utils');
-const db = require('../../db/db');
-const GetRegisterMail = require('./utils/registerMail');
+import { v4 as uuidv4 } from 'uuid';
+import { emailTransporter, frontend_link, email } from '../../utils/index.js';
+import db from '../../db/db.js';
+import GetRegisterMail from './utils/registerMail.js';
 
 function register(app) {
   app.get('/register', (req, res) => {
@@ -42,4 +42,4 @@ function register(app) {
   });
 }
 
-module.exports = register;
+export default register;

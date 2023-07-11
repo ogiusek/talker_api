@@ -1,4 +1,4 @@
-const db = require("../../db");
+import db from "../../db.js";
 
 function getFile(id, callback) {
   db.all(`SELECT value FROM files WHERE id = ?;`, [id], (err, rows) => {
@@ -8,4 +8,4 @@ function getFile(id, callback) {
   });
 }
 
-module.exports = getFile;
+export default getFile;

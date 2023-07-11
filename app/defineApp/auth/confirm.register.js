@@ -1,4 +1,4 @@
-const db = require("../../db/db");
+import db from "../../db/db.js";
 
 function confirm_register(app) {
   app.get('/register/confirm', (req, res) => {
@@ -19,4 +19,4 @@ function confirm_register(app) {
   });
 }
 
-module.exports = confirm_register;
+export default confirm_register;

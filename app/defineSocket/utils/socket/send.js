@@ -6,4 +6,4 @@ const socketEmit = (socket, eventname, data) => {
   }
 }
 
-module.exports = socketEmit;
+export default socketEmit;

@@ -1,5 +1,5 @@
-const { db } = require('../../db');
-const { auth_user } = require('../../utils');
+import db from '../../db/db.js';
+import auth_user from '../../utils/utilsCodes/auth_user.js';
 
 function contacts(app) {
   app.get('/contacts', (req, res) => {
@@ -34,4 +34,5 @@ function contacts(app) {
     }, () => { res.sendStatus(400); });
   });
 }
-module.exports = contacts;
+
+export default contacts;

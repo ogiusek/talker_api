@@ -1,7 +1,7 @@
-const { db } = require('../../../db');
-const { auth_user } = require("../../../utils");
-const { setEvent, socketEmit } = require('../../utils');
-const notify = require('./notify');
+import db from '../../../db/db.js';
+import { auth_user } from '../../../utils/index.js';
+import { setEvent, socketEmit } from '../../utils/index.js';
+import notify from './notify.js';
 
 const markAsReaden = (socket, data) => {
   if (typeof data !== 'object' || !('user_id' in data) || !('messeage_id' in data))

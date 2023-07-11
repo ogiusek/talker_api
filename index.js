@@ -1,17 +1,15 @@
+import { WebSocketServer } from 'ws';
+import http from "http";
+import { Server as io } from "socket.io";
+import express from 'express';
 const PORT = 8080;
-const WebSocket = require('ws');
 
-const http = require('http');
-const io = require('socket.io');
-const express = require('express');
-
-const defineApp = require('./app/defineApp');
-const { defineSocket } = require('./app');
+import { defineApp, defineSocket } from "./app/index.js";
 
 const app = express();
 const httpServer = http.createServer(app);
-const wsServer = new WebSocket.Server({ server: httpServer });
-const socketServer = io(httpServer);
+const wsServer = new WebSocketServer({ server: httpServer });
+const socketServer = new io(httpServer);
 
 // setInterval(() => db.all(`SELECT * FROM users_addresses;`, (err, rows) => console.log('Clients: ' + rows.length)), 3000);
 

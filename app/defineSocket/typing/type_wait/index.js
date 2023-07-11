@@ -1,8 +1,7 @@
-const db = require('../../../db/db');
-
-const { auth_user } = require('../../../utils');
-const { setEvent, socketEmit } = require('../../utils');
-const notify = require('../notify');
+import db from '../../../db/db.js';
+import { auth_user } from '../../../utils/index.js';
+import { setEvent, socketEmit } from '../../utils/index.js';
+import notify from '../notify/index.js';
 
 const type_wait = (socket, data) => {
   const clientAddress = socket.handshake ? socket.handshake.url : socket.url;

@@ -1,6 +1,6 @@
-const { db } = require('../../../db');
-const { for_address } = require('../../../utils');
-const { socketEmit, clients } = require('../../utils');
+import db from '../../../db/db.js';
+import { for_address } from '../../../utils/index.js';
+import { socketEmit, clients } from '../../utils/index.js';
 
 function notify(messeage_id) {
   db.all(`SELECT from_user FROM messeages WHERE id = ?;`, [messeage_id], (err, rows) => {
@@ -11,4 +11,4 @@ function notify(messeage_id) {
   });
 };
 
-module.exports = notify;
+export default notify;

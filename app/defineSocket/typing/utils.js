@@ -8,7 +8,4 @@ const runTimer = (identyfier) => {
   }, typingTimeout);
 };
 
-module.exports = {
-  runTimer: runTimer,
-  typing: typing
-};
+export { runTimer, typing };

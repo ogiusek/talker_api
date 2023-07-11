@@ -1,6 +1,5 @@
-const dbCommands = require('../../db/db.commands');
-const db = require('../../db/db');
-const { setEvent, socketEmit } = require('../utils');
+import { dbCommands, db } from '../../db/index.js';
+import { setEvent, socketEmit } from '../utils/index.js';
 
 const login = (socket, data) => {
   const clientAddress = socket.handshake ? socket.handshake.url : socket.url;

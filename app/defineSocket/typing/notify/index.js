@@ -1,6 +1,5 @@
-const db = require('../../../db/db');
-
-const { socketEmit, clients } = require('../../utils');
+import db from '../../../db/db.js';
+import { socketEmit, clients } from '../../utils/index.js';
 
 function notify(user, to) {
   db.all(`SELECT user_address FROM typing_wait WHERE user = ? AND to_user = ?`, [user, to], (err, waitingRows) => {
@@ -22,4 +21,4 @@ function notify(user, to) {
   });
 }
 
-module.exports = notify;
+export default notify;

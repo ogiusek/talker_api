@@ -1,5 +1,3 @@
-const send = require('./send');
+import send from "./send.js";
 
-module.exports = {
-  socketEmit: send,
-};
+export { send as socketEmit };

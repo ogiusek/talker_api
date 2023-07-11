@@ -1,6 +1,6 @@
-const db = require('../../db/db');
-const { socketEmit } = require('../../defineSocket/utils');
-const clients = require('../../defineSocket/utils/clients');
+import db from '../../db/db.js';
+import { socketEmit } from '../../defineSocket/utils/index.js';
+import clients from '../../defineSocket/utils/clients.js';
 
 function auth_user(socket, data, onLogin, onWrongData = () => { }) {
   const socketIsHandshake = typeof socket !== 'object';
@@ -19,4 +19,4 @@ function auth_user(socket, data, onLogin, onWrongData = () => { }) {
     });
 }
 
-module.exports = auth_user;
+export default auth_user;

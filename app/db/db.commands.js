@@ -1,12 +1,12 @@
-const resetClientAddress = require('./func/clientAddress/reset');
-const setClientAddress = require('./func/clientAddress/set');
-const { getFile, getFileId } = require('./func/files');
-const removeTemporaryData = require('./func/temporary');
+import resetClientAddress from './func/clientAddress/reset.js';
+import setClientAddress from './func/clientAddress/set.js';
+import { getFile, getFileId } from './func/files/index.js';
+import removeTemporaryData from './func/temporary/index.js';
 
-module.exports = {
-  resetClientAddress: resetClientAddress,
-  setClientAddress: setClientAddress,
-  getFile: getFile,
-  getFileId: getFileId,
-  removeTemporaryData: removeTemporaryData,
+export {
+  resetClientAddress,
+  setClientAddress,
+  getFile,
+  getFileId,
+  removeTemporaryData
 };

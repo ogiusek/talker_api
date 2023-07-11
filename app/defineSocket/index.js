@@ -1,7 +1,11 @@
-const { dbCommands } = require('../db');
+import { dbCommands } from '../db/index.js';
 
-let clients = require('./utils/clients');
-const { getEvents, getEvent, socketEmit } = require('./utils'); require('./auth'); require('./block_user'); require('./messeages'); require('./typing');
+import clients from './utils/clients.js';
+import { getEvent, getEvents, socketEmit } from './utils/index.js';
+import * as _1 from "./auth/index.js";
+import * as _2 from "./block_user/index.js";
+import * as _3 from "./messeages/index.js";
+import * as _4 from "./typing/index.js";
 
 const onInit = (socket) => {
   if (socket.handshake) {
@@ -47,4 +51,4 @@ function defineSocket(socket) {
   });
 }
 
-module.exports = { defineSocket: defineSocket, clients: clients };
+export { defineSocket, clients };
