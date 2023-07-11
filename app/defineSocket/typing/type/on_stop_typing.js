@@ -1,6 +1,6 @@
-const db = require('../../../db/db');
-const { typing } = require('../utils');
-const notify = require('../notify');
+import db from '../../../db/db.js';
+import { typing } from '../utils.js';
+import notify from '../notify/index.js';
 
 function on_stop_typing(data, identyfier) {
   return () => {
@@ -12,4 +12,4 @@ function on_stop_typing(data, identyfier) {
   }
 }
 
-module.exports = on_stop_typing;
+export default on_stop_typing;

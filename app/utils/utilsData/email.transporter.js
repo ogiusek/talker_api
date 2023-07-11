@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer');
-const email = require('./email');
-const emailPass = require('./email.pass');
+import nodemailer from "nodemailer";
+import email from "./email.js";
+import emailPass from "./email.pass.js";
 
 const emailTransporter = nodemailer.createTransport({
   host: 'smtp.wp.pl',
@@ -8,4 +8,4 @@ const emailTransporter = nodemailer.createTransport({
   auth: { user: email, pass: emailPass }
 });
 
-module.exports = emailTransporter;
+export default emailTransporter;

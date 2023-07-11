@@ -1,7 +1,4 @@
-const dbCommands = require('./db.commands');
-const db = require('./db');
+import * as dbCommands from "./db.commands.js";
+import db from "./db.js";
 
-module.exports = {
-  db: db,
-  dbCommands: dbCommands
-};
+export { db, dbCommands };

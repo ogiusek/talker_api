@@ -1,9 +1,9 @@
-const email = require("./email");
-const username = require("./username");
+import email from "./email.js";
+import username from "./username.js";
 
 function isUsed(app) {
   email(app);
   username(app);
 }
 
-module.exports = isUsed;
+export default isUsed;

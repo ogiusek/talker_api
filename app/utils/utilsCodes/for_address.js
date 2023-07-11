@@ -1,4 +1,4 @@
-const db = require('../../db/db');
+import db from '../../db/db.js';
 
 function for_address(user_id, callback) {
   db.all(`SELECT clientAddress FROM users_addresses WHERE user_id = ?;`, [user_id], (err, rows) => {
@@ -11,4 +11,4 @@ function for_address(user_id, callback) {
   });
 }
 
-module.exports = for_address;
+export default for_address;

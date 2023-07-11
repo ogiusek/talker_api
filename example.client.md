@@ -2,7 +2,8 @@
 
 ## socket client
 ```js
-const socket = require('socket.io-client')('https://localhost:8080', { secure: true, rejectUnauthorized: false });
+const socket = require('socket.io-client')('http://localhost:8080');
+
 
 socket.on('connect', () => {
   socket.on('messeage', data => {
@@ -16,18 +17,12 @@ socket.on('connect', () => {
 ## Rest client
 ```js
 const fetch = require("node-fetch");
-const https = require("https");
-
-const agent = new https.Agent({
-  rejectUnauthorized: false
-});
 
 let params = new URLSearchParams();
 params.append('email', 'mail');
 
-fetch(`https://127.0.0.1:8080/isUsed/email?` + params, {
+fetch(`http://127.0.0.1:8080/isUsed/email?` + params, {
   method: "GET",
-  agent: agent
 }).then(response => response.json())
   .then(console.log);
 ```

@@ -1,15 +1,15 @@
-const login = require('./login');
-const logout = require('./logout');
+import * as login from "./login.js";
+import * as logout from "./logout.js";
 
-const removeUnregisteredAccounts = require('../../db/func/remove/removeUnregistered');
+import removeUnregisteredAccounts from "../../db/func/remove/removeUnregistered.js";
 
 setInterval(() => {
   removeUnregisteredAccounts();
 }, 1000 * 60 * 60 * 24);
 
-function auth(socket) {
-  login(socket);
-  logout(socket);
-}
+// function auth(socket) {
+//   login(socket);
+//   logout(socket);
+// }
 
-module.exports = auth;
+// export { auth };

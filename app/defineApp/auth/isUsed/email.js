@@ -1,4 +1,4 @@
-const { db } = require("../../../db");
+import { db } from "../../../db/index.js";
 
 function email(app) {
   app.get('/isUsed/email', (req, res) => {
@@ -18,4 +18,4 @@ function email(app) {
   });
 }
 
-module.exports = email;
+export default email;

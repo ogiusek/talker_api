@@ -1,11 +1,9 @@
-const dbCommands = require('../../db/db.commands.js');
+import { dbCommands } from '../../db/index.js';
+import { setEvent } from '../utils/index.js';
 
-function logout(socket) {
-  const clientAddress = socket.handshake.url;
-
-  socket.on('logout', _ => {
-    dbCommands.resetClientAddress(clientAddress);
-  });
+const logout = (socket, data) => {
+  const clientAddress = socket.handshake ? socket.handshake.url : socket.url;
+  dbCommands.resetClientAddress(clientAddress);
 }
 
-module.exports = logout;
+setEvent('logout', logout);

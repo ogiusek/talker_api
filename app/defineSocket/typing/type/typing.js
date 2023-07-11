@@ -1,31 +1,28 @@
-const db = require('../../../db/db');
+import db from '../../../db/db.js';
+import { runTimer, typing } from '../utils.js';
+import on_stop_typing from './on_stop_typing.js';
+import notify from '../notify/index.js';
+import { auth_user } from '../../../utils/index.js';
+import { setEvent, socketEmit } from '../../utils/index.js';
 
-const { runTimer, typing } = require('../utils');
-const on_stop_typing = require('./on_stop_typing');
-const notify = require('../notify');
+const type = (socket, data) => {
+  if (typeof data !== 'object' || !('user_id' in data) || !('to_id' in data))
+    return socketEmit(socket, 'error', 400);
 
-const { auth_user } = require('../../../utils');
+  auth_user(socket, data, () => {
+    const identyfier = data['user_id'] + '-' + data['to_id'];
 
-function type(socket) {
-  socket.on('type', data => {
-    if (typeof data !== 'object' || !('user_id' in data) || !('to_id' in data))
-      return socket.emit('error', 400);
+    if (typing[identyfier] === undefined) {
+      typing[identyfier] = { 'func': on_stop_typing(data, identyfier) };
 
-    auth_user(socket, data, () => {
-      const identyfier = data['user_id'] + '-' + data['to_id'];
+      db.run(`INSERT INTO typing(user, to_user) VALUES(?, ?);`,
+        [data['user_id'], data['to_id']], () => {
+          notify(data['user_id'], data['to_id']);
+        });
+    }
 
-      if (typing[identyfier] === undefined) {
-        typing[identyfier] = { 'func': on_stop_typing(data, identyfier) };
-
-        db.run(`INSERT INTO typing(user, to_user) VALUES(?, ?);`,
-          [data['user_id'], data['to_id']], () => {
-            notify(data['user_id'], data['to_id']);
-          });
-      }
-
-      runTimer(identyfier);
-    });
+    runTimer(identyfier);
   });
 }
 
-module.exports = type;
+setEvent('type', type);
