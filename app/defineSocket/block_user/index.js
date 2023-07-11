@@ -1,2 +1,7 @@
-import * as _1 from "./block.js";
-import * as _2 from "./unlock.js";
+import block from "./block.js";
+import unlock from "./unlock.js";
+
+export default function block_user() {
+  block();
+  unlock();
+}

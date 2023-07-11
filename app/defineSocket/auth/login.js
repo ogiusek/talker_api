@@ -1,8 +1,8 @@
 import { dbCommands, db } from '../../db/index.js';
 import { setEvent, socketEmit } from '../utils/index.js';
 
-const login = (socket, data) => {
-  const clientAddress = socket.handshake ? socket.handshake.url : socket.url;
+const Login = (socket, data) => {
+  const clientAddress = socket.uniqueAddress;
   if (typeof data !== 'object' || !('login' in data) || !('hash' in data))
     return socketEmit(socket, 'error', 400);
 
@@ -17,4 +17,6 @@ const login = (socket, data) => {
     });
 };
 
-setEvent('login', login);
+export default function login() {
+  setEvent('login', Login);
+};

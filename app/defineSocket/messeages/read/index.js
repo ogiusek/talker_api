@@ -3,7 +3,7 @@ import { auth_user } from '../../../utils/index.js';
 import { setEvent, socketEmit } from '../../utils/index.js';
 import notify from './notify.js';
 
-const markAsReaden = (socket, data) => {
+const MarkAsReaden = (socket, data) => {
   if (typeof data !== 'object' || !('user_id' in data) || !('messeage_id' in data))
     return socketEmit(socket, 'error', 400);
 
@@ -15,4 +15,6 @@ const markAsReaden = (socket, data) => {
   });
 }
 
-setEvent('read', markAsReaden);
+export default function markAsReaden() {
+  setEvent('read', MarkAsReaden);
+}
