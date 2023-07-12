@@ -1,1 +1,3 @@
-import * as _1 from "./typing.js";
+import typing from "./typing.js";
+
+export default typing;

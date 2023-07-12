@@ -1,5 +1,5 @@
 import db from '../../../db/db.js';
-import { runTimer, typing } from '../utils.js';
+import { runTimer, typing as typing_ } from '../utils.js';
 import on_stop_typing from './on_stop_typing.js';
 import notify from '../notify/index.js';
 import { auth_user } from '../../../utils/index.js';
@@ -12,8 +12,8 @@ const type = (socket, data) => {
   auth_user(socket, data, () => {
     const identyfier = data['user_id'] + '-' + data['to_id'];
 
-    if (typing[identyfier] === undefined) {
-      typing[identyfier] = { 'func': on_stop_typing(data, identyfier) };
+    if (typing_[identyfier] === undefined) {
+      typing_[identyfier] = { 'func': on_stop_typing(data, identyfier) };
 
       db.run(`INSERT INTO typing(user, to_user) VALUES(?, ?);`,
         [data['user_id'], data['to_id']], () => {
@@ -25,4 +25,6 @@ const type = (socket, data) => {
   });
 }
 
-setEvent('type', type);
+export default function typing() {
+  setEvent('type', type);
+}

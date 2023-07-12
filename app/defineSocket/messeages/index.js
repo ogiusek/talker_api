@@ -4,9 +4,9 @@ import auth_user from '../../utils/utilsCodes/auth_user.js';
 import notify from './notify/index.js';
 import { setEvent } from '../utils/index.js';
 
-import * as _1 from "./read/index.js";
+import markAsReaden from './read/index.js';
 
-const messeage = (socket, data) => {
+const Messeage = (socket, data) => {
   const content_type = !('content_type' in data) ? 'text' : data['content_type'];
   if (typeof data !== 'object' || !('user_id' in data) || !('to_id' in data) || !('content' in data))
     return socketEmit(socket, "error", 400);
@@ -23,4 +23,7 @@ const messeage = (socket, data) => {
   });
 }
 
-setEvent('messeage', messeage);
+export default function messeage() {
+  markAsReaden();
+  setEvent('messeage', Messeage);
+}

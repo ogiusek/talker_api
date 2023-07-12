@@ -1,11 +1,21 @@
 import { dbCommands } from '../db/index.js';
-
+import { v4 as uuidv4 } from 'uuid';
 import clients from './utils/clients.js';
 import { getEvent, getEvents, socketEmit } from './utils/index.js';
-import * as _1 from "./auth/index.js";
-import * as _2 from "./block_user/index.js";
-import * as _3 from "./messeages/index.js";
-import * as _4 from "./typing/index.js";
+import { auth } from './auth/index.js';
+import block_user from './block_user/index.js';
+import messeage from './messeages/index.js';
+import typing from './typing/index.js';
+
+function defineSocketMethods() {
+  auth();
+  block_user();
+  messeage();
+  typing();
+}
+
+defineSocketMethods();
+
 
 const onInit = (socket) => {
   if (socket.handshake) {
@@ -17,9 +27,10 @@ const onInit = (socket) => {
   }
 }
 
-function defineSocket(socket) {
-  const clientAddress = socket.handshake ? socket.handshake.url : // socket.io socket
-    socket.url; // ws socket
+function defineSocket(socket, request) {
+  if (!socket.handshake) socket.uniqueAddress = `ws://${request.socket.remoteAddress}/${new Date().getTime()}/${uuidv4()}`;
+  else socket.uniqueAddress = socket.handshake.url;
+  const clientAddress = socket.uniqueAddress;
 
   if (clients[clientAddress] === undefined)
     clients[clientAddress] = {};

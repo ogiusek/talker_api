@@ -3,8 +3,8 @@ import { auth_user } from '../../../utils/index.js';
 import { setEvent, socketEmit } from '../../utils/index.js';
 import notify from '../notify/index.js';
 
-const type_wait = (socket, data) => {
-  const clientAddress = socket.handshake ? socket.handshake.url : socket.url;
+const Type_wait = (socket, data) => {
+  const clientAddress = socket.uniqueAddress;
   if (typeof data !== 'object' || !('user_id' in data) || !('to_id' in data))
     return socketEmit(socket, 'error', 400);
 
@@ -19,4 +19,6 @@ const type_wait = (socket, data) => {
   });
 }
 
-setEvent('type_wait', type_wait);
+export default function type_wait() {
+  setEvent('type_wait', Type_wait);
+}

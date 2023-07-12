@@ -3,7 +3,7 @@ import db from "../../db/db.js";
 import auth_user from "../../utils/utilsCodes/auth_user.js";
 import { setEvent, socketEmit } from "../utils/index.js";
 
-const unlock = (socket, data) => {
+const Unlock = (socket, data) => {
   if (typeof data !== 'object' || !('user_id' in data) || !('blocked_id' in data))
     return socketEmit(socket, "error", 400);
 
@@ -15,4 +15,6 @@ const unlock = (socket, data) => {
   });
 }
 
-setEvent('unlock_user', unlock);
+export default function unlock() {
+  setEvent('unlock_user', Unlock);
+}

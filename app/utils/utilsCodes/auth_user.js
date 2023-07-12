@@ -6,7 +6,7 @@ function auth_user(socket, data, onLogin, onWrongData = () => { }) {
   const socketIsHandshake = typeof socket !== 'object';
 
   db.all(`SELECT user_id FROM users_addresses WHERE user_id = ? AND clientAddress = ?;`,
-    [data['user_id'], socketIsHandshake ? socket : (socket.handshake ? socket.handshake.url : socket.url)], (err, rows) => {
+    [data['user_id'], socketIsHandshake ? socket : (socket.uniqueAddress)], (err, rows) => {
       try {
         if (rows.length === 1) return onLogin();
 
