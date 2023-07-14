@@ -4,4 +4,4 @@
 
 *pass.*
 *.pem
-/app/db/db.db
+/db.db
