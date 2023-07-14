@@ -5,3 +5,6 @@
 *pass.*
 *.pem
 /db.db
+
+# if gitignore do not work's try this 
+# git rm -r --cached .
