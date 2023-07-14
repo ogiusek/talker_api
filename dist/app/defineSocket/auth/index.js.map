@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../src/app/defineSocket/auth/index.ts"],"names":[],"mappings":";;;;;;AAAA,oDAA4B;AAC5B,sDAA8B;AAE9B,iGAAiF;AAEjF,WAAW,CAAC,GAAG,EAAE;IACf,IAAA,4BAA0B,GAAE,CAAC;AAC/B,CAAC,EAAE,IAAI,GAAG,EAAE,GAAG,EAAE,GAAG,EAAE,CAAC,CAAC;AAExB,SAAS,IAAI;IACX,IAAA,eAAK,GAAE,CAAC;IACR,IAAA,gBAAM,GAAE,CAAC;AACX,CAAC;AAEQ,oBAAI"}
