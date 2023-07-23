@@ -4,4 +4,7 @@
 
 *pass.*
 *.pem
-/app/db/db.db
+/db.db
+
+# if gitignore do not work's try this 
+# git rm -r --cached .
