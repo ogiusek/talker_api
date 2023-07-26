@@ -30,8 +30,8 @@ const init = (db: any) => {
     init_date DATE DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(avatar_id) REFERENCES files(id)
   );`, () => {
-    db.run(`INSERT INTO users(email, username, hash) VALUES("kowalewski.olgierd@gmail.com", "user", "x");`, () => 0);
-    db.run(`INSERT INTO users(email, username, hash) VALUES("ogius06@wp.pl", "talker", "x");`, () => 0);
+    db.run(`INSERT INTO users(email, username, hash) VALUES("kowalewski.olgierd@gmail.com", "user", "123456");`, () => 0);
+    db.run(`INSERT INTO users(email, username, hash) VALUES("ogius06@wp.pl", "talker", "123456");`, () => 0);
   });
   db.run(`CREATE TABLE IF NOT EXISTS users_addresses(
     user_id INTEGER NOT NULL,

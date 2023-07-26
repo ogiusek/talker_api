@@ -22,9 +22,11 @@ function register(app: any) {
           });
 
           db.all(`SELECT id FROM unconfirmed_users WHERE email = ?;`, [query['email']], (errUUsers: any, rowsUUsers: any) => {
+            const link = `${frontend_link}/auth/register/confirm/` + rowsUUsers[0].id + '/' + uuid;
             const mailOptions = {
               from: email, to: query['email'], subject: 'Confirmation Email',
-              html: GetRegisterMail(`${frontend_link}/register/confirm/` + rowsUUsers[0].id + '/' + uuid),
+              text: `Enter the link to confirm your accont ${link}`,
+              html: GetRegisterMail(link),
             };
 
             emailTransporter.sendMail(mailOptions, (error: any, info: any) => {

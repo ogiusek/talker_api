@@ -11,8 +11,8 @@ function confirm_register(app: any) {
       if (rows.length !== 1) return res.json({ res: 'Wrong or out dated link' });
       const user = rows[0];
 
-      db.run(`INSERT INTO users(email, username, hash) VALUES(?, ?, ?, ?);`, [user.email, user.username, user.hash]);
-      db.run(`DELETE FROM unconfirmed_users WHERE email = ?;`, [user.email]);
+      db.run(`INSERT INTO users(email, username, hash) VALUES(?, ?, ?);`, [user.email, user.username, user.hash], () => { });
+      db.run(`DELETE FROM unconfirmed_users WHERE email = ?;`, [user.email], () => { });
 
       res.json({ res: 'Success you can login' });
     });
