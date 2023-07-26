@@ -9,8 +9,7 @@ const Login = (socket: any, data: any) => {
   db.all(`SELECT email, id FROM users 
   WHERE (username = ? OR email = ?) AND hash = ?;`,
     [data['login'], data['login'], data['hash']], (err: any, rows: any) => {
-      if (rows.length !== 1)
-        return socketEmit(socket, 'login', false);
+      if (rows.length !== 1) return socketEmit(socket, 'login', false);
 
       socketEmit(socket, 'login', { id: rows[0].id, handshake: clientAddress });
       dbCommands.setClientAddress(data['login'], clientAddress);
