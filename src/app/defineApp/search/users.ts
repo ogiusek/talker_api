@@ -9,7 +9,7 @@ function users(app: any) {
       return res.sendStatus(400);
 
     auth_user(query.clientAddress, query, () => {
-
+      db.all('SELECT * FROM users WHERE (email LIKE ? OR username LIKE ?);', [query['user_name'], query['user_name']]);
       res.json({});
     }, () => {
       res.sendStatus(400);
