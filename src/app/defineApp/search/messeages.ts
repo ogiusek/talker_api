@@ -3,7 +3,7 @@ import auth_user from '../../utils/utilsCodes/auth_user';
 
 
 function messeage(app: any) {
-  app.get('/messeages', (req: any, res: any) => {
+  app.get('/search/messeages', (req: any, res: any) => {
     const query = req.query;
     if (typeof query !== 'object' || !('user_id' in query) || !('clientAddress' in query)
       || !('messeage' in query) || !('talker_id' in query))
