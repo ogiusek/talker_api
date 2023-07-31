@@ -11,11 +11,13 @@ function auth_user(socket: any, data: any, onLogin: any, onWrongData = () => { }
         if (rows.length === 1) return onLogin();
 
         const realSocket = socketIsHandshake ?
-          clients[socket].socket :
+          clients[socket]?.socket :
           socket;
         socketEmit(realSocket, 'auth', false);
         onWrongData();
-      } catch (err) { }
+      } catch (err) {
+        onWrongData();
+      }
     });
 }
 
