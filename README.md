@@ -113,6 +113,24 @@ Returns all messeages
 | ***`with_id`*** | `int` | User id with which you are chattin | yes |
 | `from_messeage` | `int` | Returns older messeages then id | no |
 
+`/search/users`
+Returns found users
+| Parameter | Type | Description | Required |
+| :- | :- | :- | :- |
+| ***`user_name`*** | `string` | Part of somebody's email or username | yes |
+
+`/search/messeages`
+Returns found messeages
+| Parameter | Type | Description | Required |
+| :- | :- | :- | :- |
+| ***`user_id`*** | `int` | User id, *Sent on login* | yes |
+| ***`clientAddress`*** | `string` | session_key id *Send on login* | yes |
+| ***`talker_id`*** | `int` | Id of somebody with who your talking | yes |
+| ***`messeage`*** | `string` | Messeage part which your searching for | yes |
+
+
+
+
 ## Socket api
 ### Server listens to
 
