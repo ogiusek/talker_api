@@ -3,7 +3,7 @@ import auth_user from '../../utils/utilsCodes/auth_user';
 
 
 function users(app: any) {
-  app.get('/users', (req: any, res: any) => {
+  app.get('/search/users', (req: any, res: any) => {
     const query = req.query;
     if (typeof query !== 'object' || !('user_name' in query))
       return res.sendStatus(400);
