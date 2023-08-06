@@ -17,7 +17,7 @@ function messeage(app: any) {
           FROM messeages 
           WHERE ((from_user = ? AND to_user = ?) OR (to_user = ? AND from_user = ?)) ${from_messeage}
           ORDER BY init_date DESC, id DESC LIMIT ${messeagesLimit + 1};`,
-        [query.user_id, query.with_id, query.with_id, query.user_id], (err: any, rows: any) => {
+        [query.user_id, query.with_id, query.user_id, query.with_id], (err: any, rows: any) => {
           if (err) return res.sendStatus(400);
 
           res.json({
