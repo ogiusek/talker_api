@@ -53,13 +53,6 @@ const init = (db: any) => {
     FOREIGN KEY(user) REFERENCES users(id),
     FOREIGN KEY(to_user) REFERENCES users(id)
   );`, [], () => db.run(`DELETE FROM typing;`));
-  db.run(`CREATE TABLE IF NOT EXISTS typing_wait(
-    user INTEGER NOT NULL,
-    user_address TEXT UNIQUE NOT NULL,
-    to_user INTEGER NOT NULL,
-    FOREIGN KEY(user) REFERENCES users(id),
-    FOREIGN KEY(to_user) REFERENCES users(id)
-  );`, [], () => db.run(`DELETE FROM typing_wait;`));
 
 
   db.run(`CREATE TABLE IF NOT EXISTS messeages(
