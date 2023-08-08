@@ -14,7 +14,6 @@ function messeage(app: any) {
               WHERE (content_type LIKE ?) AND (content_type = 'text') AND
               ((from_user = ? AND to_user = ?) OR (to_user = ? AND from_user = ?));`, [
         query.messeage, query.user_id, query.talker_id, query.user_id, query.talker_id], (err, rows) => {
-          console.log(rows);
           res.json({ res: rows });
         });
     }, () => {
