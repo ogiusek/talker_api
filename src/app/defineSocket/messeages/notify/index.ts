@@ -23,4 +23,4 @@ function notify(user: any) {
   });
 }
 
-export default notify
+export default notify;
