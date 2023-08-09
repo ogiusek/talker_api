@@ -55,11 +55,16 @@ function defineSocket(socket: any, request?: any): any {
     });
   }
 
-  socket.on('disconnect', () => {
+  const close = () => {
     dbCommands.removeTemporaryData(clientAddress);
     dbCommands.resetClientAddress(clientAddress);
     delete clients[clientAddress];
-  });
+  };
+
+
+  socket.on('close', close);
+
+  socket.on('disconnect', close);
 }
 
 export { defineSocket, clients };

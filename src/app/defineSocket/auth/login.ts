@@ -1,5 +1,6 @@
 import { dbCommands, db } from '../../db/index';
 import { setEvent, socketEmit } from '../utils/index';
+import notify from '../messeages/notify';
 
 const Login = (socket: any, data: any) => {
   const clientAddress = socket.uniqueAddress;
@@ -13,6 +14,7 @@ const Login = (socket: any, data: any) => {
 
       socketEmit(socket, 'login', { id: rows[0].id, handshake: clientAddress });
       dbCommands.setClientAddress(data['login'], clientAddress);
+      notify(rows[0].id);
     });
 };
 
