@@ -1,5 +1,5 @@
 import { dbCommands } from '../../db/index.js';
-import { clients, setEvent } from '../utils/index.js';
+import { setEvent } from '../utils/index.js';
 
 const Logout = (socket: any, data: any) => {
   const clientAddress = socket.uniqueAddress;
