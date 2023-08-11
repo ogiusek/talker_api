@@ -203,14 +203,6 @@ Used while you're typing to show caller
 | ***`to_id`*** | `int` | Id of your caller |
 
 
-`type_wait`
-Sends you info when caller typing
-| Parameter | type | Description |
-| :- | :- | :- |
-| ***`user_id`*** | `int` | Your id |
-| ***`to_id`*** | `int` | Id of your caller |
-
-
 ### Server emit's
 
 - ***`error`***
