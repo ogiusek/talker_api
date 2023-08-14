@@ -10,7 +10,7 @@ function contacts(app: any) {
     auth_user(query.clientAddress, query, () => {
       db.all(`SELECT DISTINCT (CASE WHEN m.from_user > m.to_user THEN
         m.from_user || ',' || m.to_user ELSE
-        m.to_user || ',' || m.from_user END) AS bab,
+        m.to_user || ',' || m.from_user END) AS filter,
 
           u.id, (SELECT value FROM files WHERE files.id = u.avatar_id) AS avatar, u.username, 
           m.content_type, (SELECT value FROM files WHERE files.id = m.content_id) AS content, m.from_user,
@@ -22,9 +22,9 @@ function contacts(app: any) {
 
           if (err) return res.sendStatus(400);
           const dRows = Object.values(rows.reduce((acc: any, obj: any) => {
-            if (!acc[obj.bab]) {
-              acc[obj.bab] = { ...obj };
-              delete acc[obj.bab].bab;
+            if (!acc[obj.filter]) {
+              acc[obj.filter] = { ...obj };
+              delete acc[obj.filter].filter;
             }
             return acc;
           }, {}));
