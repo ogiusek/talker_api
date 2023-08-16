@@ -3,10 +3,10 @@
 
 FROM node:16
 
-WORKDIR /app
-COPY . /app
+WORKDIR /
+COPY . /
 
-RUN npm i
+RUN npm i --force
 RUN npm i -g typescript
 
 EXPOSE 8080
