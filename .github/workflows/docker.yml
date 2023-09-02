@@ -1,0 +1,13 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Docker talker_api
+      run: |
+        docker build -t talker_api -f talker_api.dockerfile .
+        docker run -p 8080:8080 -d talker_api
